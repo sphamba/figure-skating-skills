@@ -1,0 +1,67 @@
+{
+  "one-foot turns": {
+    "variants": [
+      ["forward", "backward"],
+      ["left", "right"],
+      ["inside", "outside"]
+    ],
+    "types": [
+      "three",
+      "double three",
+      "bracket",
+      "rocker",
+      "counter",
+      "loop",
+      {
+        "name": "twizzle",
+        "variants": [
+          [
+            "1 rotation",
+            "1.5 rotations",
+            "2 rotations",
+            "2.5 rotations",
+            "3 rotations",
+            "3.5 rotations",
+            "4 rotations",
+            "4.5 rotations"
+          ]
+        ]
+      }
+    ]
+  },
+  "two-feet turns": {
+    "variants": [
+      ["forward", "backward"],
+      ["left", "right"],
+      ["inside", "outside"],
+      ["open", "closed"]
+    ],
+    "types": [
+      "mohawk",
+      "choctaw"
+    ]
+  },
+  "jumps": {
+    "variants": [
+      ["single", "double", "triple", "quadruple"]
+    ],
+    "types": [
+      "toe loop",
+      "salchow",
+      "loop",
+      "flip",
+      "lutz",
+      "axel"
+    ]
+  },
+  "spins": {
+    "variants": [
+      ["forward", "backward"]
+    ],
+    "types": [
+      "upright",
+      "sit",
+      "camel"
+    ]
+  }
+}
