@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import { useSkillsStore } from '../stores/skills'
 import SelectButton from 'primevue/selectbutton'
 
@@ -131,35 +131,34 @@ watch(skills, (newSkills) => {
   selectFirstIfEmpty(selectedSkill, newSkills)
 }, { immediate: true })
 
-watch(() => skillConfig.value?.variants?.[0], (options) => {
-  selectFirstIfEmpty(selectedVariant0, options)
-}, { immediate: true })
+watch(selectedSkill, () => {
+  selectedVariant0.value = null
+  selectedVariant1.value = null
+  selectedVariant2.value = null
+  selectedVariant3.value = null
+  selectedType.value = null
+  selectedOption0.value = null
+  selectedOption1.value = null
+})
 
-watch(() => skillConfig.value?.variants?.[1], (options) => {
-  selectFirstIfEmpty(selectedVariant1, options)
-}, { immediate: true })
+watch(selectedType, () => {
+  selectedOption0.value = null
+  selectedOption1.value = null
+})
 
-watch(() => skillConfig.value?.variants?.[2], (options) => {
-  selectFirstIfEmpty(selectedVariant2, options)
-}, { immediate: true })
+// Variant/type auto-selection is handled in onSelectionChange with nextTick
 
-watch(() => skillConfig.value?.variants?.[3], (options) => {
-  selectFirstIfEmpty(selectedVariant3, options)
-}, { immediate: true })
-
-watch(displayTypes, (options) => {
-  selectFirstIfEmpty(selectedType, options)
-}, { immediate: true })
-
-watch(() => selectedTypeObj.value?.variants?.[0], (options) => {
-  selectFirstIfEmpty(selectedOption0, options)
-}, { immediate: true })
-
-watch(() => selectedTypeObj.value?.variants?.[1], (options) => {
-  selectFirstIfEmpty(selectedOption1, options)
-}, { immediate: true })
-
-function onSelectionChange() {
+async function onSelectionChange() {
+  await nextTick()
+  if (selectedSkill.value) {
+    selectFirstIfEmpty(selectedVariant0, skillConfig.value?.variants?.[0])
+    selectFirstIfEmpty(selectedVariant1, skillConfig.value?.variants?.[1])
+    selectFirstIfEmpty(selectedVariant2, skillConfig.value?.variants?.[2])
+    selectFirstIfEmpty(selectedVariant3, skillConfig.value?.variants?.[3])
+    selectFirstIfEmpty(selectedType, displayTypes.value)
+    selectFirstIfEmpty(selectedOption0, selectedTypeObj.value?.variants?.[0])
+    selectFirstIfEmpty(selectedOption1, selectedTypeObj.value?.variants?.[1])
+  }
   updateSelectedPath()
 }
 
