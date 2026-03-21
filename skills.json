@@ -1,8 +1,8 @@
 {
   "one-foot turns": {
     "variants": [
-      ["forward", "backward"],
       ["left", "right"],
+      ["forward", "backward"],
       ["inside", "outside"]
     ],
     "types": [
@@ -31,8 +31,8 @@
   },
   "two-feet turns": {
     "variants": [
-      ["forward", "backward"],
       ["left", "right"],
+      ["forward", "backward"],
       ["inside", "outside"],
       ["open", "closed"]
     ],
