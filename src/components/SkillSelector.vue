@@ -1,95 +1,86 @@
 <template>
   <div class="skill-selector">
-    <div class="selector-row">
-      <label>Skill</label>
-      <Dropdown
+    <!-- Skill -->
+    <div v-if="skills.length" class="option-category">
+      <SelectButton
         v-model="selectedSkill"
         :options="skills"
         option-label="label"
         option-value="value"
-        placeholder="Select a skill"
-        class="w-full"
-        @change="onSkillChange"
+        allowEmpty
+        @change="onSelectionChange"
       />
     </div>
 
-    <div v-if="skillConfig" class="selector-row">
-      <label>Direction</label>
-      <Dropdown
-        v-if="skillConfig.variants[0]"
+    <!-- Direction -->
+    <div v-if="skillConfig?.variants?.[0]?.length" class="option-category">
+      <SelectButton
         v-model="selectedVariant0"
         :options="skillConfig.variants[0]"
-        placeholder="Select direction"
-        class="w-full"
-        @change="onVariantChange(0)"
+        allowEmpty
+        @change="onSelectionChange"
       />
     </div>
 
-    <div v-if="skillConfig?.variants[1]" class="selector-row">
-      <label>Edge</label>
-      <Dropdown
+    <!-- Edge -->
+    <div v-if="skillConfig?.variants?.[1]?.length" class="option-category">
+      <SelectButton
         v-model="selectedVariant1"
         :options="skillConfig.variants[1]"
-        placeholder="Select edge"
-        class="w-full"
-        @change="onVariantChange(1)"
+        allowEmpty
+        @change="onSelectionChange"
       />
     </div>
 
-    <div v-if="skillConfig?.variants[2]" class="selector-row">
-      <label>Additional</label>
-      <Dropdown
+    <!-- Additional -->
+    <div v-if="skillConfig?.variants?.[2]?.length" class="option-category">
+      <SelectButton
         v-model="selectedVariant2"
         :options="skillConfig.variants[2]"
-        placeholder="Select additional"
-        class="w-full"
-        @change="onVariantChange(2)"
+        allowEmpty
+        @change="onSelectionChange"
       />
     </div>
 
-    <div v-if="skillConfig?.variants[3]" class="selector-row">
-      <label>Style</label>
-      <Dropdown
+    <!-- Style -->
+    <div v-if="skillConfig?.variants?.[3]?.length" class="option-category">
+      <SelectButton
         v-model="selectedVariant3"
         :options="skillConfig.variants[3]"
-        placeholder="Select style"
-        class="w-full"
-        @change="onVariantChange(3)"
+        allowEmpty
+        @change="onSelectionChange"
       />
     </div>
 
-    <div class="selector-row">
-      <label>Type</label>
-      <Dropdown
+    <!-- Type -->
+    <div v-if="displayTypes.length" class="option-category">
+      <SelectButton
         v-model="selectedType"
         :options="displayTypes"
         option-label="label"
         option-value="value"
-        placeholder="Select type"
-        class="w-full"
-        @change="onTypeChange"
+        allowEmpty
+        @change="onSelectionChange"
       />
     </div>
 
-    <div v-if="selectedTypeObj?.variants" class="selector-row">
-      <label>Rotations</label>
-      <Dropdown
+    <!-- Rotations -->
+    <div v-if="selectedTypeObj?.variants?.[0]?.length" class="option-category">
+      <SelectButton
         v-model="selectedOption0"
         :options="selectedTypeObj.variants[0]"
-        placeholder="Select rotations"
-        class="w-full"
-        @change="onOptionChange(0)"
+        allowEmpty
+        @change="onSelectionChange"
       />
     </div>
 
-    <div v-if="selectedTypeObj?.variants?.[1]" class="selector-row">
-      <label>Additional Option</label>
-      <Dropdown
+    <!-- Additional Option -->
+    <div v-if="selectedTypeObj?.variants?.[1]?.length" class="option-category">
+      <SelectButton
         v-model="selectedOption1"
         :options="selectedTypeObj.variants[1]"
-        placeholder="Select additional option"
-        class="w-full"
-        @change="onOptionChange(1)"
+        allowEmpty
+        @change="onSelectionChange"
       />
     </div>
   </div>
@@ -98,7 +89,7 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import { useSkillsStore } from '../stores/skills'
-import Dropdown from 'primevue/dropdown'
+import SelectButton from 'primevue/selectbutton'
 
 const skillsStore = useSkillsStore()
 
@@ -111,6 +102,16 @@ const skillConfig = computed(() => {
   return skillsStore.getSkillConfig(selectedSkill.value)
 })
 
+const displayTypes = computed(() => {
+  if (!skillConfig.value) return []
+  return skillConfig.value.types.map(type => ({
+    label: typeof type === 'string' ? type : type.name,
+    value: type
+  }))
+})
+
+const selectedTypeObj = computed(() => selectedType.value)
+
 const selectedSkill = ref(null)
 const selectedVariant0 = ref(null)
 const selectedVariant1 = ref(null)
@@ -120,40 +121,45 @@ const selectedType = ref(null)
 const selectedOption0 = ref(null)
 const selectedOption1 = ref(null)
 
-const displayTypes = computed(() => {
-  if (!skillConfig.value) return []
-  return skillConfig.value.types.map(type => ({
-    label: typeof type === 'string' ? type : type.name,
-    value: type
-  }))
-})
-
-const selectedTypeObj = computed(() => {
-  return selectedType.value
-})
-
-function onSkillChange() {
-  selectedVariant0.value = null
-  selectedVariant1.value = null
-  selectedVariant2.value = null
-  selectedVariant3.value = null
-  selectedType.value = null
-  selectedOption0.value = null
-  selectedOption1.value = null
-  updateSelectedPath()
+function selectFirstIfEmpty(refObj, options) {
+  if (!refObj.value && options && options.length > 0) {
+    refObj.value = options[0].value || options[0]
+  }
 }
 
-function onVariantChange(index) {
-  updateSelectedPath()
-}
+watch(skills, (newSkills) => {
+  selectFirstIfEmpty(selectedSkill, newSkills)
+}, { immediate: true })
 
-function onTypeChange() {
-  selectedOption0.value = null
-  selectedOption1.value = null
-  updateSelectedPath()
-}
+watch(() => skillConfig.value?.variants?.[0], (options) => {
+  selectFirstIfEmpty(selectedVariant0, options)
+}, { immediate: true })
 
-function onOptionChange(index) {
+watch(() => skillConfig.value?.variants?.[1], (options) => {
+  selectFirstIfEmpty(selectedVariant1, options)
+}, { immediate: true })
+
+watch(() => skillConfig.value?.variants?.[2], (options) => {
+  selectFirstIfEmpty(selectedVariant2, options)
+}, { immediate: true })
+
+watch(() => skillConfig.value?.variants?.[3], (options) => {
+  selectFirstIfEmpty(selectedVariant3, options)
+}, { immediate: true })
+
+watch(displayTypes, (options) => {
+  selectFirstIfEmpty(selectedType, options)
+}, { immediate: true })
+
+watch(() => selectedTypeObj.value?.variants?.[0], (options) => {
+  selectFirstIfEmpty(selectedOption0, options)
+}, { immediate: true })
+
+watch(() => selectedTypeObj.value?.variants?.[1], (options) => {
+  selectFirstIfEmpty(selectedOption1, options)
+}, { immediate: true })
+
+function onSelectionChange() {
   updateSelectedPath()
 }
 
@@ -171,7 +177,7 @@ function updateSelectedPath() {
 
   const path = {
     skill: selectedSkill.value,
-    variants: variants,
+    variants: variants.length ? variants : null,
     type: selectedType.value,
     options: []
   }
@@ -187,10 +193,10 @@ function updateSelectedPath() {
 onMounted(() => {
   if (skillsStore.selectedPath) {
     selectedSkill.value = skillsStore.selectedPath.skill
-    selectedVariant0.value = skillsStore.selectedPath.variants[0] || null
-    selectedVariant1.value = skillsStore.selectedPath.variants[1] || null
-    selectedVariant2.value = skillsStore.selectedPath.variants[2] || null
-    selectedVariant3.value = skillsStore.selectedPath.variants[3] || null
+    selectedVariant0.value = skillsStore.selectedPath.variants?.[0] || null
+    selectedVariant1.value = skillsStore.selectedPath.variants?.[1] || null
+    selectedVariant2.value = skillsStore.selectedPath.variants?.[2] || null
+    selectedVariant3.value = skillsStore.selectedPath.variants?.[3] || null
     selectedType.value = skillsStore.selectedPath.type
     selectedOption0.value = skillsStore.selectedPath.options?.[0] || null
     selectedOption1.value = skillsStore.selectedPath.options?.[1] || null
@@ -209,15 +215,57 @@ onMounted(() => {
   box-shadow: var(--card-shadow);
 }
 
-.selector-row {
+.option-category {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.selector-row label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-color);
+:deep(.p-selectbutton) {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+:deep(.p-selectbutton::-webkit-scrollbar) {
+  height: 6px;
+}
+
+:deep(.p-selectbutton::-webkit-scrollbar-thumb) {
+  background: var(--surface-border);
+  border-radius: 3px;
+}
+
+:deep(.p-selectbutton::-webkit-scrollbar-track) {
+  background: var(--surface-ground);
+}
+
+:deep(.p-selectbutton .p-button) {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .skill-selector {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  :deep(.p-selectbutton .p-button) {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  :deep(.p-selectbutton .p-button) {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.813rem;
+  }
 }
 </style>
