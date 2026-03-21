@@ -218,12 +218,17 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 :deep(.p-selectbutton) {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
   gap: 0.5rem;
   padding: 0.25rem 0;
   scrollbar-width: thin;
@@ -243,9 +248,15 @@ onMounted(() => {
   background: var(--surface-ground);
 }
 
-:deep(.p-selectbutton .p-button) {
+:deep(.p-selectbutton .p-togglebutton) {
+  flex: 0 0 auto;
   white-space: nowrap;
-  flex-shrink: 0;
+  overflow: visible;
+}
+
+:deep(.p-selectbutton .p-togglebutton .p-togglebutton-label) {
+  white-space: nowrap;
+  overflow: visible;
 }
 
 @media (max-width: 768px) {
@@ -254,7 +265,7 @@ onMounted(() => {
     gap: 0.75rem;
   }
 
-  :deep(.p-selectbutton .p-button) {
+  :deep(.p-selectbutton .p-togglebutton) {
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
     min-height: 44px;
@@ -262,7 +273,7 @@ onMounted(() => {
 }
 
 @media (max-width: 480px) {
-  :deep(.p-selectbutton .p-button) {
+  :deep(.p-selectbutton .p-togglebutton) {
     padding: 0.4rem 0.6rem;
     font-size: 0.813rem;
   }
