@@ -56,23 +56,33 @@ onMounted(() => {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   border: none;
+  align-items: flex-start;
+}
+
+.header-toolbar :deep(.p-toolbar-start) {
+  min-width: 0;
+  flex: 1;
 }
 
 .header-left {
   display: flex;
-  align-items: center;
   gap: 0.75rem;
+  min-width: 0;
+  flex: 1;
 }
 
 .header-icon {
   font-size: 1.5rem;
   color: var(--primary-color);
+  flex-shrink: 0;
 }
 
 .header-title {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-color);
+  overflow: hidden;
+  white-space: normal;
 }
 
 .theme-toggle {
