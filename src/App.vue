@@ -22,36 +22,10 @@
         </div>
       </div>
 
-      <div class="stats-section" v-if="skillsStore.progressSummary.total > 0">
+      <div class="stats-section">
         <Card>
-          <template #title>Progress Overview</template>
           <template #content>
-            <div class="stats-grid">
-              <div class="stat-card">
-                <span class="stat-value">{{ skillsStore.progressSummary.total }}</span>
-                <span class="stat-label">Total Tracked</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-value">{{ skillsStore.progressSummary.mastered }}</span>
-                <span class="stat-label">Mastered</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-value">{{ skillsStore.progressSummary.clean }}</span>
-                <span class="stat-label">Clean</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-value">{{ skillsStore.progressSummary.consistent }}</span>
-                <span class="stat-label">Consistent</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-value">{{ skillsStore.progressSummary.attempted }}</span>
-                <span class="stat-label">Attempted</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-value">{{ skillsStore.progressSummary.neverAttempted }}</span>
-                <span class="stat-label">Never Attempted</span>
-              </div>
-            </div>
+            <ProgressOverview />
           </template>
         </Card>
       </div>
@@ -68,6 +42,7 @@ import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import SkillSelector from './components/SkillSelector.vue'
 import ProgressDisplay from './components/ProgressDisplay.vue'
+import ProgressOverview from './components/ProgressOverview.vue'
 import Card from 'primevue/card'
 
 const skillsStore = useSkillsStore()
