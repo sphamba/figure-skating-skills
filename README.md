@@ -73,7 +73,7 @@ npm run preview
 
 ## Usage
 
-1. **Select a Skill**: Choose from available skills (one-foot turns, two-feet turns, jumps, spins)
+1. **Select a Skill**: Choose from available skills (one-foot turns, two-foot turns, jumps, spins)
 2. **Choose Variants**: Select direction, edge, and other variant options
 3. **Pick a Type**: Choose the specific type of skill (e.g., twizzle, three, bracket)
 4. **Set Options**: Select specific options like rotation count (for twizzles)

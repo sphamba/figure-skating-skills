@@ -76,7 +76,7 @@ watch(includeNeverAttempted, (val) => {
 const categories = computed(() => {
   const cats = [
     { key: 'one-foot turns', label: 'One-foot turns' },
-    { key: 'two-feet turns', label: 'Two-feet turns' },
+    { key: 'two-foot turns', label: 'Two-foot turns' },
     { key: 'jumps', label: 'Jumps' },
     { key: 'spins', label: 'Spins' }
   ]

@@ -55,6 +55,15 @@ function generateSkillPaths(skillName, skillConfig, path = []) {
           })
         })
       })
+    } else {
+      allVariantPaths.forEach(variantPath => {
+        paths.push({
+          skill: skillName,
+          variants: variantPath,
+          type: type.name,
+          options: null
+        })
+      })
     }
   })
 
