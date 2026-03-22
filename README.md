@@ -105,7 +105,3 @@ The skills are defined in `skills.json` with the following structure:
   }
 }
 ```
-
-## License
-
-MIT
