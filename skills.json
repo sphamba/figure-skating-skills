@@ -3,11 +3,11 @@
     "types": [
       {
         "name": "three",
-        "displayedName": "three turn"
+        "displayedName": "three-turn"
       },
       {
         "name": "double three",
-        "displayedName": "double three turn"
+        "displayedName": "double three-turn"
       },
       "bracket",
       "rocker",
@@ -35,7 +35,7 @@
       ["inside", "outside"]
     ]
   },
-  "two-feet turns": {
+  "two-foot turns": {
     "types": [
       "mohawk",
       "choctaw"

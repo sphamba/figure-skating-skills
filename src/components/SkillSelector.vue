@@ -8,7 +8,7 @@
         :options="skills"
         option-label="label"
         option-value="value"
-        allowEmpty
+        :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
@@ -19,7 +19,7 @@
         :options="displayTypes"
         option-label="label"
         option-value="value"
-        allowEmpty
+        :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
@@ -28,7 +28,7 @@
       <SelectButton
         v-model="selectedVariant0"
         :options="skillConfig.variants[0]"
-        allowEmpty
+        :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
@@ -37,7 +37,7 @@
       <SelectButton
         v-model="selectedVariant1"
         :options="skillConfig.variants[1]"
-        allowEmpty
+        :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
@@ -46,7 +46,7 @@
       <SelectButton
         v-model="selectedVariant2"
         :options="skillConfig.variants[2]"
-        allowEmpty
+        :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
@@ -55,7 +55,7 @@
       <SelectButton
         v-model="selectedVariant3"
         :options="skillConfig.variants[3]"
-        allowEmpty
+        :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
@@ -64,7 +64,7 @@
       <SelectButton
         v-model="selectedOption0"
         :options="selectedTypeObj.variants[0]"
-        allowEmpty
+        :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
@@ -74,7 +74,7 @@
       <SelectButton
         v-model="selectedOption1"
         :options="selectedTypeObj.variants[1]"
-        allowEmpty
+        :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
@@ -124,6 +124,9 @@ function selectFirstIfEmpty(refObj, options) {
 
 watch(skills, (newSkills) => {
   selectFirstIfEmpty(selectedSkill, newSkills)
+  if (selectedSkill.value) {
+    onSelectionChange()
+  }
 }, { immediate: true })
 
 watch(selectedSkill, () => {
@@ -194,6 +197,7 @@ onMounted(() => {
     selectedType.value = skillsStore.selectedPath.type
     selectedOption0.value = skillsStore.selectedPath.options?.[0] || null
     selectedOption1.value = skillsStore.selectedPath.options?.[1] || null
+    onSelectionChange()
   }
 })
 </script>
