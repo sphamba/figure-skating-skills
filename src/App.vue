@@ -28,6 +28,8 @@
           </template>
         </Card>
       </div>
+
+      <ResetButton />
     </main>
 
     <Footer />
@@ -42,6 +44,7 @@ import Footer from './components/Footer.vue'
 import SkillSelector from './components/SkillSelector.vue'
 import ProgressDisplay from './components/ProgressDisplay.vue'
 import ProgressOverview from './components/ProgressOverview.vue'
+import ResetButton from './components/ResetButton.vue'
 import Card from 'primevue/card'
 
 const skillsStore = useSkillsStore()
