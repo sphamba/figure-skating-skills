@@ -250,6 +250,34 @@ onMounted(() => {
   overflow: visible;
 }
 
+:deep(.p-selectbutton) {
+  border: none;
+  background: transparent;
+}
+
+:deep(.p-selectbutton .p-togglebutton) {
+  border: none;
+  border-radius: var(--border-radius, 6px);
+  padding: 0.25rem 0.5rem;
+  background: var(--surface-100);
+  color: var(--surface-600);
+  transition: background 0.2s, color 0.2s;
+}
+
+:deep(.p-selectbutton .p-togglebutton:hover) {
+  background: var(--surface-200);
+}
+
+:deep(.p-selectbutton .p-togglebutton[aria-pressed="true"]) {
+  background: var(--sky-100);
+  color: var(--sky-700);
+}
+
+:deep(.p-selectbutton .p-togglebutton:focus-visible) {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--primary-color);
+}
+
 @media (max-width: 768px) {
   .skill-selector {
     gap: 0.75rem;
@@ -268,4 +296,6 @@ onMounted(() => {
     font-size: 0.813rem;
   }
 }
+
+
 </style>
