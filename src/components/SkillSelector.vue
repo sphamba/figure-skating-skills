@@ -1,5 +1,5 @@
 <template>
-  <div class="skill-selector card flex-col gap-1">
+  <div class="skill-selector card flex-col">
 	<h3 class="section-title section-title--primary">Skill selection</h3>
     <!-- Skill -->
     <div v-if="skills.length" class="option-category">
@@ -269,8 +269,8 @@ onMounted(() => {
 }
 
 :deep(.p-selectbutton .p-togglebutton[aria-pressed="true"]) {
-  background: var(--sky-100);
-  color: var(--sky-700);
+  background: var(--primary-color);
+  color: var(--surface-0);
 }
 
 :deep(.p-selectbutton .p-togglebutton:focus-visible) {
@@ -280,20 +280,19 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .skill-selector {
-    gap: 0.75rem;
+    gap: 0rem;
   }
 
   :deep(.p-selectbutton .p-togglebutton) {
     padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    min-height: 44px;
+    min-height: 32px;
   }
 }
 
 @media (max-width: 480px) {
   :deep(.p-selectbutton .p-togglebutton) {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.813rem;
+    padding: 0;
+    font-size: 0.875rem;
   }
 }
 

@@ -74,7 +74,7 @@ function getIconColorClass(starNum, rating) {
 }
 
 .star-icon {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   width: 2rem;
   text-align: center;
   color: var(--text-color);

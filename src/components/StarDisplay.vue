@@ -36,14 +36,13 @@ function starClass(starPosition) {
   gap: 0.125rem;
 }
 
-
-
-.star-filled,
-.star-half {
+.star-filled {
   color: #ffc107; /* yellow */
+  font-size: 1.3rem;
 }
 
 .star-empty {
-  color: #6c757d; /* gray */
+color: #6c757d; /* gray */
+  font-size: 1.3rem;
 }
 </style>

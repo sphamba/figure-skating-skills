@@ -177,7 +177,7 @@ const variantGroups = computed(() => {
 .variant-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
+  gap: 0;
 }
 
 .category-label,

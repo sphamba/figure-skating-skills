@@ -55,8 +55,6 @@ const currentRating = computed({
   min-width: 300px;
 }
 
-
-
 .skill-path {
   display: flex;
   flex-direction: column;
