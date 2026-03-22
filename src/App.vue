@@ -6,7 +6,6 @@
       <div class="content-wrapper">
         <div class="left-panel">
           <Card>
-            <template #title>Skill Selector</template>
             <template #content>
               <SkillSelector />
             </template>
@@ -81,7 +80,7 @@ onMounted(() => {
 
 .main-content {
   flex: 1;
-  padding: 1.5rem;
+  padding: 1rem;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
@@ -107,6 +106,9 @@ onMounted(() => {
 
 .stats-section {
   margin-top: 1rem;
+}
+.stats-section :deep(.p-card-body) {
+  padding: 0;
 }
 
 .stats-grid {

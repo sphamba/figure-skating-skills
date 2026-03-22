@@ -5,6 +5,7 @@ import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
 import App from './App.vue'
 import './style.css'
+import './assets/app.css'
 
 const app = createApp(App)
 const pinia = createPinia()

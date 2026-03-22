@@ -1,8 +1,7 @@
 <template>
-  <footer class="app-footer">
+  <footer class="app-footer card">
     <div class="footer-content">
-      <span class="footer-text">Figure Skating Skills Tracker</span>
-      <span class="footer-text">Progress saved automatically</span>
+      <span class="footer-text">Bend your knees!</span>
     </div>
   </footer>
 </template>
@@ -11,7 +10,6 @@
 .app-footer {
   margin-top: auto;
   padding: 1rem;
-  background: var(--surface-card);
   border-top: 1px solid var(--surface-border);
 }
 

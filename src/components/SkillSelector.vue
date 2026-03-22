@@ -1,5 +1,6 @@
 <template>
-  <div class="skill-selector">
+  <div class="skill-selector card flex-col gap-1">
+	<h3 class="section-title section-title--primary">Skill selection</h3>
     <!-- Skill -->
     <div v-if="skills.length" class="option-category">
       <SelectButton
@@ -204,16 +205,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.skill-selector {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-  background: var(--surface-card);
-  border-radius: var(--border-radius);
-  box-shadow: var(--card-shadow);
-}
-
 .option-category {
   display: flex;
   flex-direction: column;
@@ -261,7 +252,6 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .skill-selector {
-    padding: 0.75rem;
     gap: 0.75rem;
   }
 

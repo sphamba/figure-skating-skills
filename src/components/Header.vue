@@ -1,5 +1,5 @@
 <template>
-  <Toolbar class="header-toolbar">
+  <Toolbar class="header-toolbar card">
     <template #start>
       <div class="header-left">
         <i class="pi pi-skateboard header-icon" />
@@ -53,11 +53,9 @@ onMounted(() => {
 
 <style scoped>
 .header-toolbar {
-  margin-bottom: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   border: none;
-  background: var(--surface-card);
-  box-shadow: var(--card-shadow);
-  border-radius: var(--border-radius);
 }
 
 .header-left {
@@ -72,7 +70,7 @@ onMounted(() => {
 }
 
 .header-title {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-color);
 }

@@ -1,7 +1,7 @@
 <template>
-  <div class="progress-display">
+  <div class="progress-display card flex-col gap-1.5">
     <div v-if="selectedPath" class="skill-path">
-      <h3 class="section-title">Selected Skill</h3>
+      <h3 class="section-title section-title--primary">Selected Skill</h3>
       <div class="path-items">
         <Tag v-if="selectedPath.skill" :value="selectedPath.skill" severity="info" />
         <Tag
@@ -25,7 +25,7 @@
     </div>
 
     <div class="rating-section">
-      <h3 class="section-title">Progress Rating</h3>
+      <h3 class="section-title section-title--primary">Progress Rating</h3>
       <StarRating v-model="currentRating" />
     </div>
   </div>
@@ -52,24 +52,10 @@ const currentRating = computed({
 
 <style scoped>
 .progress-display {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 1rem;
-  background: var(--surface-card);
-  border-radius: var(--border-radius);
-  box-shadow: var(--card-shadow);
   min-width: 300px;
 }
 
-.section-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: 0.75rem;
-  border-bottom: 2px solid var(--primary-color);
-  padding-bottom: 0.5rem;
-}
+
 
 .skill-path {
   display: flex;
