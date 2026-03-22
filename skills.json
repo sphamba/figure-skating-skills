@@ -1,13 +1,14 @@
 {
   "one-foot turns": {
-    "variants": [
-      ["left", "right"],
-      ["forward", "backward"],
-      ["inside", "outside"]
-    ],
     "types": [
-      "three",
-      "double three",
+      {
+        "name": "three",
+        "displayedName": "three turn"
+      },
+      {
+        "name": "double three",
+        "displayedName": "double three turn"
+      },
       "bracket",
       "rocker",
       "counter",
@@ -27,24 +28,26 @@
           ]
         ]
       }
+    ],
+    "variants": [
+      ["left", "right"],
+      ["forward", "backward"],
+      ["inside", "outside"]
     ]
   },
   "two-feet turns": {
+    "types": [
+      "mohawk",
+      "choctaw"
+    ],
     "variants": [
       ["left", "right"],
       ["forward", "backward"],
       ["inside", "outside"],
       ["open", "closed"]
-    ],
-    "types": [
-      "mohawk",
-      "choctaw"
     ]
   },
   "jumps": {
-    "variants": [
-      ["single", "double", "triple", "quadruple"]
-    ],
     "types": [
       "toe loop",
       "salchow",
@@ -52,16 +55,28 @@
       "flip",
       "lutz",
       "axel"
+    ],
+    "variants": [
+      ["single", "double", "triple", "quadruple"]
     ]
   },
   "spins": {
+    "types": [
+      {
+        "name": "upright",
+        "displayedName": "upright spin"
+      },
+      {
+        "name": "sit",
+        "displayedName": "sit spin"
+      },
+      {
+        "name": "camel",
+        "displayedName": "camel spin"
+      }
+    ],
     "variants": [
       ["forward", "backward"]
-    ],
-    "types": [
-      "upright",
-      "sit",
-      "camel"
     ]
   }
 }

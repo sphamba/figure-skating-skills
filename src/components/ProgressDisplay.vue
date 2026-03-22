@@ -3,7 +3,6 @@
     <div v-if="selectedPath" class="skill-path">
       <h3 class="section-title section-title--primary">Selected Skill</h3>
       <div class="path-items">
-        <Tag v-if="selectedPath.skill" :value="selectedPath.skill" severity="info" />
         <Tag
           v-for="(variant, index) in selectedPath.variants"
           :key="index"
@@ -12,8 +11,8 @@
         />
         <Tag
           v-if="selectedPath.type"
-          :value="typeof selectedPath.type === 'string' ? selectedPath.type : selectedPath.type.name"
-          severity="warning"
+          :value="skillsStore.getTypeDisplayName(selectedPath.type)"
+          severity="info"
         />
         <Tag
           v-for="(option, index) in selectedPath.options || []"

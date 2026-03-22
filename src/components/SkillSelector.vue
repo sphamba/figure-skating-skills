@@ -13,47 +13,6 @@
       />
     </div>
 
-    <!-- Direction -->
-    <div v-if="skillConfig?.variants?.[0]?.length" class="option-category">
-      <SelectButton
-        v-model="selectedVariant0"
-        :options="skillConfig.variants[0]"
-        allowEmpty
-        @change="onSelectionChange"
-      />
-    </div>
-
-    <!-- Edge -->
-    <div v-if="skillConfig?.variants?.[1]?.length" class="option-category">
-      <SelectButton
-        v-model="selectedVariant1"
-        :options="skillConfig.variants[1]"
-        allowEmpty
-        @change="onSelectionChange"
-      />
-    </div>
-
-    <!-- Additional -->
-    <div v-if="skillConfig?.variants?.[2]?.length" class="option-category">
-      <SelectButton
-        v-model="selectedVariant2"
-        :options="skillConfig.variants[2]"
-        allowEmpty
-        @change="onSelectionChange"
-      />
-    </div>
-
-    <!-- Style -->
-    <div v-if="skillConfig?.variants?.[3]?.length" class="option-category">
-      <SelectButton
-        v-model="selectedVariant3"
-        :options="skillConfig.variants[3]"
-        allowEmpty
-        @change="onSelectionChange"
-      />
-    </div>
-
-    <!-- Type -->
     <div v-if="displayTypes.length" class="option-category">
       <SelectButton
         v-model="selectedType"
@@ -65,7 +24,42 @@
       />
     </div>
 
-    <!-- Rotations -->
+    <div v-if="skillConfig?.variants?.[0]?.length" class="option-category">
+      <SelectButton
+        v-model="selectedVariant0"
+        :options="skillConfig.variants[0]"
+        allowEmpty
+        @change="onSelectionChange"
+      />
+    </div>
+
+    <div v-if="skillConfig?.variants?.[1]?.length" class="option-category">
+      <SelectButton
+        v-model="selectedVariant1"
+        :options="skillConfig.variants[1]"
+        allowEmpty
+        @change="onSelectionChange"
+      />
+    </div>
+
+    <div v-if="skillConfig?.variants?.[2]?.length" class="option-category">
+      <SelectButton
+        v-model="selectedVariant2"
+        :options="skillConfig.variants[2]"
+        allowEmpty
+        @change="onSelectionChange"
+      />
+    </div>
+
+    <div v-if="skillConfig?.variants?.[3]?.length" class="option-category">
+      <SelectButton
+        v-model="selectedVariant3"
+        :options="skillConfig.variants[3]"
+        allowEmpty
+        @change="onSelectionChange"
+      />
+    </div>
+
     <div v-if="selectedTypeObj?.variants?.[0]?.length" class="option-category">
       <SelectButton
         v-model="selectedOption0"
@@ -106,7 +100,7 @@ const skillConfig = computed(() => {
 const displayTypes = computed(() => {
   if (!skillConfig.value) return []
   return skillConfig.value.types.map(type => ({
-    label: typeof type === 'string' ? type : type.name,
+    label: skillsStore.getTypeName(type),
     value: type
   }))
 })
@@ -114,11 +108,11 @@ const displayTypes = computed(() => {
 const selectedTypeObj = computed(() => selectedType.value)
 
 const selectedSkill = ref(null)
+const selectedType = ref(null)
 const selectedVariant0 = ref(null)
 const selectedVariant1 = ref(null)
 const selectedVariant2 = ref(null)
 const selectedVariant3 = ref(null)
-const selectedType = ref(null)
 const selectedOption0 = ref(null)
 const selectedOption1 = ref(null)
 
@@ -133,11 +127,11 @@ watch(skills, (newSkills) => {
 }, { immediate: true })
 
 watch(selectedSkill, () => {
+  selectedType.value = null
   selectedVariant0.value = null
   selectedVariant1.value = null
   selectedVariant2.value = null
   selectedVariant3.value = null
-  selectedType.value = null
   selectedOption0.value = null
   selectedOption1.value = null
 })
@@ -152,11 +146,11 @@ watch(selectedType, () => {
 async function onSelectionChange() {
   await nextTick()
   if (selectedSkill.value) {
+    selectFirstIfEmpty(selectedType, displayTypes.value)
     selectFirstIfEmpty(selectedVariant0, skillConfig.value?.variants?.[0])
     selectFirstIfEmpty(selectedVariant1, skillConfig.value?.variants?.[1])
     selectFirstIfEmpty(selectedVariant2, skillConfig.value?.variants?.[2])
     selectFirstIfEmpty(selectedVariant3, skillConfig.value?.variants?.[3])
-    selectFirstIfEmpty(selectedType, displayTypes.value)
     selectFirstIfEmpty(selectedOption0, selectedTypeObj.value?.variants?.[0])
     selectFirstIfEmpty(selectedOption1, selectedTypeObj.value?.variants?.[1])
   }
@@ -177,8 +171,8 @@ function updateSelectedPath() {
 
   const path = {
     skill: selectedSkill.value,
-    variants: variants.length ? variants : null,
     type: selectedType.value,
+    variants: variants.length ? variants : null,
     options: []
   }
 
