@@ -28,13 +28,6 @@
       <h3 class="section-title">Progress Rating</h3>
       <StarRating v-model="currentRating" />
     </div>
-
-    <div v-if="hasProgress" class="progress-info">
-      <div class="info-row">
-        <span class="info-label">Current Level:</span>
-        <span class="info-value">{{ getRatingDescription(currentRating) }}</span>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -55,20 +48,6 @@ const currentRating = computed({
     }
   }
 })
-
-const hasProgress = computed(() => selectedPath.value !== null)
-
-function getRatingDescription(rating) {
-  const descriptions = [
-    'Never attempted',
-    'Attempted',
-    'Can do consistently',
-    'Clean',
-    'Can do within a sequence',
-    'Mastered'
-  ]
-  return descriptions[rating] || ''
-}
 </script>
 
 <style scoped>

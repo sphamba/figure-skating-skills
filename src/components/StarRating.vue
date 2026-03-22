@@ -4,16 +4,14 @@
       v-for="starNum in 6"
       :key="starNum"
       class="star-row"
-      :class="{ 'selected': rating === starNum - 1 }"
       @click="$emit('update:modelValue', starNum - 1)"
     >
-      <div class="star-icon">
+      <div class="star-icon" :class="getIconColorClass(starNum, modelValue)">
         <i v-if="starNum === 1" class="pi pi-times-circle" />
-        <i v-else-if="starNum <= rating + 1" class="pi pi-star-fill" />
+        <i v-else-if="starNum <= modelValue + 1" class="pi pi-star-fill" />
         <i v-else class="pi pi-star" />
       </div>
       <div class="star-label">
-        <span class="star-number">{{ starNum - 1 }}</span>
         <span class="star-description">{{ getRatingDescription(starNum - 1) }}</span>
       </div>
     </div>
@@ -41,58 +39,59 @@ function getRatingDescription(rating) {
   ]
   return descriptions[rating] || ''
 }
+
+function getIconColorClass(starNum, rating) {
+  // starNum is 1-6 representing ratings 0-5
+  if (rating === 0 && starNum === 1) {
+    return 'red'
+  }
+  if (rating >= 1 && starNum >= 2 && starNum <= rating + 1) {
+    return 'yellow'
+  }
+  return ''
+}
 </script>
 
 <style scoped>
 .star-rating {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1rem;
+  gap: 0.125rem;
+  padding: 0.25rem;
 }
 
 .star-row {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem;
+  gap: 0.25rem;
+  padding: 0.125rem;
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 
 .star-row:hover {
   background-color: var(--surface-hover);
 }
 
-.star-row.selected {
-  background-color: var(--primary-color);
-  color: var(--primary-contrast-color);
-}
-
 .star-icon {
   font-size: 1.5rem;
   width: 2rem;
   text-align: center;
-}
-
-.star-row.selected .star-icon {
-  color: var(--primary-contrast-color);
-}
-
-.star-row:not(.selected) .star-icon {
   color: var(--text-color);
+}
+
+.star-rating .star-row .star-icon.red {
+  color: #dc3545 !important;
+}
+
+.star-rating .star-row .star-icon.yellow {
+  color: #ffc107 !important;
 }
 
 .star-label {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-}
-
-.star-number {
-  font-size: 1.25rem;
-  font-weight: 700;
 }
 
 .star-description {
