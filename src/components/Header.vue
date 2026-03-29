@@ -19,36 +19,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { useTheme } from '../composables/useTheme'
 import Toolbar from 'primevue/toolbar'
 import Button from 'primevue/button'
 
-const isDarkMode = ref(false)
-
-function updateDarkMode() {
-  isDarkMode.value = window.matchMedia('(prefers-color-scheme: dark)').matches
-  applyTheme()
-}
-
-function applyTheme() {
-  if (isDarkMode.value) {
-    document.documentElement.classList.add('my-app-dark')
-  } else {
-    document.documentElement.classList.remove('my-app-dark')
-  }
-}
-
-function toggleDarkMode() {
-  isDarkMode.value = !isDarkMode.value
-  applyTheme()
-}
-
-watch(isDarkMode, applyTheme)
-
-onMounted(() => {
-  updateDarkMode()
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateDarkMode)
-})
+const { isDarkMode, toggleDarkMode } = useTheme()
 </script>
 
 <style scoped>

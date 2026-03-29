@@ -37,8 +37,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
 import { useSkillsStore } from './stores/skills'
+import { useTheme } from './composables/useTheme'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import SkillSelector from './components/SkillSelector.vue'
@@ -48,29 +48,7 @@ import ResetButton from './components/ResetButton.vue'
 import Card from 'primevue/card'
 
 const skillsStore = useSkillsStore()
-const isDarkMode = ref(false)
-
-function updateDarkMode() {
-  isDarkMode.value = window.matchMedia('(prefers-color-scheme: dark)').matches
-  if (isDarkMode.value) {
-    document.documentElement.classList.add('my-app-dark')
-  } else {
-    document.documentElement.classList.remove('my-app-dark')
-  }
-}
-
-watch(isDarkMode, (isDark) => {
-  if (isDark) {
-    document.documentElement.classList.add('my-app-dark')
-  } else {
-    document.documentElement.classList.remove('my-app-dark')
-  }
-})
-
-onMounted(() => {
-  updateDarkMode()
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateDarkMode)
-})
+const { isDarkMode } = useTheme()
 </script>
 
 <style scoped>
