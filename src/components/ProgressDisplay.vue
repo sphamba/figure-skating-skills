@@ -10,15 +10,15 @@
           severity="secondary"
         />
         <Tag
-          v-if="selectedPath.type"
-          :value="skillsStore.getTypeDisplayName(selectedPath.type)"
-          severity="info"
-        />
-        <Tag
           v-for="(option, index) in selectedPath.options || []"
           :key="index"
           :value="option"
-          severity="success"
+          severity="secondary"
+        />
+        <Tag
+          v-if="selectedPath.type"
+          :value="skillsStore.getTypeDisplayName(selectedPath.type)"
+          severity="info"
         />
       </div>
     </div>

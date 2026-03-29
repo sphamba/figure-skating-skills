@@ -114,7 +114,7 @@ const variantGroups = computed(() => {
   
   return groups.map(group => {
     // Filter paths that include this variant
-    const paths = skillsStore.allPaths.filter(p => p.variants.includes(group.key))
+    const paths = skillsStore.allPaths.filter(p => (p.variants || []).includes(group.key))
     
     // Filter by includeNeverAttempted
     const filteredPaths = includeNeverAttempted.value 

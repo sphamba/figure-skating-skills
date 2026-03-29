@@ -89,7 +89,7 @@ function getTypeName(type) {
 
 function createSkillKey(path) {
   const typeName = getTypeName(path.type)
-  const parts = [path.skill, ...path.variants, typeName]
+  const parts = [path.skill, ...(path.variants || []), typeName]
   if (path.options) {
     parts.push(...path.options)
   }

@@ -49,22 +49,69 @@
   },
   "jumps": {
     "types": [
-      "toe loop",
-      "salchow",
-      "loop",
-      "flip",
-      "lutz",
-      "axel"
+      {
+        "name": "waltz",
+        "displayedName": "waltz jump"
+      },
+      {
+        "name": "toe loop",
+        "variants": [
+          ["single", "double", "triple", "quadruple"]
+        ]
+      },
+      {
+        "name": "salchow",
+        "variants": [
+          ["single", "double", "triple", "quadruple"]
+        ]
+      },
+      {
+        "name": "loop",
+        "variants": [
+          ["single", "double", "triple", "quadruple"]
+        ]
+      },
+      {
+        "name": "flip",
+        "variants": [
+          ["single", "double", "triple", "quadruple"]
+        ]
+      },
+      {
+        "name": "lutz",
+        "variants": [
+          ["single", "double", "triple", "quadruple"]
+        ]
+      },
+      {
+        "name": "axel",
+        "variants": [
+          ["single", "double", "triple", "quadruple"]
+        ]
+      },
+      "euler",
+      {
+        "name": "walley",
+        "variants": [
+          ["single", "double"]
+        ]
+      },
+      {
+        "name": "split",
+        "displayedName": "slipt jump"
+      },
+      "stag leap"
     ],
-    "variants": [
-      ["single", "double", "triple", "quadruple"]
-    ]
+    "variants": []
   },
   "spins": {
     "types": [
       {
         "name": "upright",
-        "displayedName": "upright spin"
+        "displayedName": "upright spin",
+		"variants": [
+		  ["standard", "layback", "Biellmann"]
+		]
       },
       {
         "name": "sit",
@@ -78,5 +125,60 @@
     "variants": [
       ["forward", "backward"]
     ]
+  },
+  "elements": {
+    "types": [
+      {
+        "name": "crossovers",
+        "variants": [
+          ["forward", "backward"],
+          ["clockwise", "counterclockwise"]
+        ]
+      },
+      {
+        "name": "cross rolls",
+        "variants": [
+          ["forward", "backward"]
+        ]
+      },
+      {
+        "name": "change of edge",
+        "variants": [
+          ["left", "right"],
+          ["forward", "backward"],
+          ["inside to outside", "outside to inside"]
+        ]
+      },
+      {
+        "name": "spiral",
+        "variants": [
+          ["arabesque", "catch-foot", "cross-grab", "Y"],
+          ["left", "right"],
+          ["forward", "backward"],
+          ["inside", "outside"]
+        ]
+      },
+      {
+        "name": "spread eagle",
+        "variants": [
+          ["left", "right"],
+          ["inside", "outside"]
+        ]
+      },
+      {
+        "name": "Ina Bauer",
+        "variants": [
+          ["left", "right"],
+          ["inside", "outside"]
+        ]
+      },
+      {
+        "name": "hydroblade",
+        "variants": [
+          ["left", "right"]
+        ]
+      }
+    ],
+    "variants": []
   }
 }

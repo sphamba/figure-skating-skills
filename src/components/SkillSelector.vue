@@ -8,6 +8,7 @@
         option-label="label"
         option-value="value"
         :allowEmpty="false"
+		class="skill-selection"
         @change="onSelectionChange"
       />
     </div>
@@ -82,6 +83,26 @@
         @change="onSelectionChange"
       />
     </div>
+
+    <div v-if="selectedTypeObj?.variants?.[2]?.length">
+      <SelectButton
+        v-model="selectedOption2"
+        :options="selectedTypeObj.variants[2]"
+		size="small"
+        :allowEmpty="false"
+        @change="onSelectionChange"
+      />
+    </div>
+
+    <div v-if="selectedTypeObj?.variants?.[3]?.length">
+      <SelectButton
+        v-model="selectedOption3"
+        :options="selectedTypeObj.variants[3]"
+		size="small"
+        :allowEmpty="false"
+        @change="onSelectionChange"
+      />
+    </div>
   </div>
 </template>
 
@@ -119,6 +140,8 @@ const selectedVariant2 = ref(null)
 const selectedVariant3 = ref(null)
 const selectedOption0 = ref(null)
 const selectedOption1 = ref(null)
+const selectedOption2 = ref(null)
+const selectedOption3 = ref(null)
 
 function selectFirstIfEmpty(refObj, options) {
   if (!refObj.value && options && options.length > 0) {
@@ -146,6 +169,8 @@ watch(selectedSkill, () => {
 watch(selectedType, () => {
   selectedOption0.value = null
   selectedOption1.value = null
+  selectedOption2.value = null
+  selectedOption3.value = null
 })
 
 // Variant/type auto-selection is handled in onSelectionChange with nextTick
@@ -160,6 +185,8 @@ async function onSelectionChange() {
     selectFirstIfEmpty(selectedVariant3, skillConfig.value?.variants?.[3])
     selectFirstIfEmpty(selectedOption0, selectedTypeObj.value?.variants?.[0])
     selectFirstIfEmpty(selectedOption1, selectedTypeObj.value?.variants?.[1])
+    selectFirstIfEmpty(selectedOption2, selectedTypeObj.value?.variants?.[2])
+    selectFirstIfEmpty(selectedOption3, selectedTypeObj.value?.variants?.[3])
   }
   updateSelectedPath()
 }
@@ -179,12 +206,14 @@ function updateSelectedPath() {
   const path = {
     skill: selectedSkill.value,
     type: selectedType.value,
-    variants: variants.length ? variants : null,
+    variants: variants.length ? variants : [],
     options: []
   }
 
   if (selectedOption0.value !== null) path.options.push(selectedOption0.value)
   if (selectedOption1.value !== null) path.options.push(selectedOption1.value)
+  if (selectedOption2.value !== null) path.options.push(selectedOption2.value)
+  if (selectedOption3.value !== null) path.options.push(selectedOption3.value)
 
   if (path.options.length === 0) path.options = null
 
@@ -201,12 +230,18 @@ onMounted(() => {
     selectedType.value = skillsStore.selectedPath.type
     selectedOption0.value = skillsStore.selectedPath.options?.[0] || null
     selectedOption1.value = skillsStore.selectedPath.options?.[1] || null
+    selectedOption2.value = skillsStore.selectedPath.options?.[2] || null
+    selectedOption3.value = skillsStore.selectedPath.options?.[3] || null
     onSelectionChange()
   }
 })
 </script>
 
 <style scoped>
+:deep(.skill-selection .p-togglebutton-label) {
+  font-weight: bold !important;
+}
+
 :deep(.p-selectbutton) {
   display: flex;
   flex-wrap: nowrap;
