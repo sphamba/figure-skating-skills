@@ -185,5 +185,6 @@ const variantGroups = computed(() => {
   flex: 1;
   font-weight: 500;
   color: var(--text-color);
+  text-align: right;
 }
 </style>

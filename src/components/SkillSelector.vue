@@ -1,8 +1,7 @@
 <template>
   <div class="skill-selector card flex-col">
 	<h3 class="section-title section-title--primary">Skill selection</h3>
-    <!-- Skill -->
-    <div v-if="skills.length" class="option-category">
+    <div v-if="skills.length">
       <SelectButton
         v-model="selectedSkill"
         :options="skills"
@@ -13,7 +12,7 @@
       />
     </div>
 
-    <div v-if="displayTypes.length" class="option-category">
+    <div v-if="displayTypes.length">
       <SelectButton
         v-model="selectedType"
         :options="displayTypes"
@@ -24,56 +23,61 @@
       />
     </div>
 
-    <div v-if="skillConfig?.variants?.[0]?.length" class="option-category">
+    <div v-if="skillConfig?.variants?.[0]?.length" >
       <SelectButton
         v-model="selectedVariant0"
         :options="skillConfig.variants[0]"
+		size="small"
         :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
 
-    <div v-if="skillConfig?.variants?.[1]?.length" class="option-category">
+    <div v-if="skillConfig?.variants?.[1]?.length">
       <SelectButton
         v-model="selectedVariant1"
         :options="skillConfig.variants[1]"
+		size="small"
         :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
 
-    <div v-if="skillConfig?.variants?.[2]?.length" class="option-category">
+    <div v-if="skillConfig?.variants?.[2]?.length">
       <SelectButton
         v-model="selectedVariant2"
         :options="skillConfig.variants[2]"
+		size="small"
         :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
 
-    <div v-if="skillConfig?.variants?.[3]?.length" class="option-category">
+    <div v-if="skillConfig?.variants?.[3]?.length">
       <SelectButton
         v-model="selectedVariant3"
         :options="skillConfig.variants[3]"
+		size="small"
         :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
 
-    <div v-if="selectedTypeObj?.variants?.[0]?.length" class="option-category">
+    <div v-if="selectedTypeObj?.variants?.[0]?.length">
       <SelectButton
         v-model="selectedOption0"
         :options="selectedTypeObj.variants[0]"
+		size="small"
         :allowEmpty="false"
         @change="onSelectionChange"
       />
     </div>
 
-    <!-- Additional Option -->
-    <div v-if="selectedTypeObj?.variants?.[1]?.length" class="option-category">
+    <div v-if="selectedTypeObj?.variants?.[1]?.length">
       <SelectButton
         v-model="selectedOption1"
         :options="selectedTypeObj.variants[1]"
+		size="small"
         :allowEmpty="false"
         @change="onSelectionChange"
       />
@@ -203,96 +207,16 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.option-category {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-}
-
 :deep(.p-selectbutton) {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  width: 100%;
   max-width: 100%;
-  gap: 0.5rem;
   padding: 0.25rem 0;
   scrollbar-width: thin;
-  -webkit-overflow-scrolling: touch;
-}
-
-:deep(.p-selectbutton::-webkit-scrollbar) {
-  height: 6px;
-}
-
-:deep(.p-selectbutton::-webkit-scrollbar-thumb) {
-  background: var(--surface-border);
-  border-radius: 3px;
-}
-
-:deep(.p-selectbutton::-webkit-scrollbar-track) {
-  background: var(--surface-ground);
 }
 
 :deep(.p-selectbutton .p-togglebutton) {
-  flex: 0 0 auto;
-  white-space: nowrap;
-  overflow: visible;
+  flex: none;
 }
-
-:deep(.p-selectbutton .p-togglebutton .p-togglebutton-label) {
-  white-space: nowrap;
-  overflow: visible;
-}
-
-:deep(.p-selectbutton) {
-  border: none;
-  background: transparent;
-}
-
-:deep(.p-selectbutton .p-togglebutton) {
-  border: none;
-  border-radius: var(--border-radius, 6px);
-  padding: 0.25rem 0.5rem;
-  background: var(--surface-100);
-  color: var(--surface-600);
-  transition: background 0.2s, color 0.2s;
-}
-
-:deep(.p-selectbutton .p-togglebutton:hover) {
-  background: var(--surface-200);
-}
-
-:deep(.p-selectbutton .p-togglebutton[aria-pressed="true"]) {
-  background: var(--primary-color);
-  color: var(--surface-0);
-}
-
-:deep(.p-selectbutton .p-togglebutton:focus-visible) {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--primary-color);
-}
-
-@media (max-width: 768px) {
-  .skill-selector {
-    gap: 0rem;
-  }
-
-  :deep(.p-selectbutton .p-togglebutton) {
-    padding: 0.5rem 0.75rem;
-    min-height: 32px;
-  }
-}
-
-@media (max-width: 480px) {
-  :deep(.p-selectbutton .p-togglebutton) {
-    padding: 0;
-    font-size: 0.875rem;
-  }
-}
-
-
 </style>

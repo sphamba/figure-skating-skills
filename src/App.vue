@@ -96,7 +96,7 @@ onMounted(() => {
   margin-bottom: 1.5rem;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1000px) {
   .content-wrapper {
     grid-template-columns: 1fr;
   }

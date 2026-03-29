@@ -23,7 +23,6 @@ app.use(PrimeVue, {
       cssLayer: false
     }
   },
-  ripple: true
 })
 
 app.use(ConfirmationService)

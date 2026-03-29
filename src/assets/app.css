@@ -104,25 +104,6 @@
   .hide-sm { display: none; }
 }
 
-/* Scrollbar styling (for selectbutton) */
-.scrollbar-thin {
-  scrollbar-width: thin;
-  -webkit-overflow-scrolling: touch;
-}
-
-.scrollbar-thin::-webkit-scrollbar {
-  height: 6px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  background: var(--surface-border);
-  border-radius: 3px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-track {
-  background: var(--surface-ground);
-}
-
 /* Text utilities */
 .text-secondary {
   color: var(--text-color-secondary);
