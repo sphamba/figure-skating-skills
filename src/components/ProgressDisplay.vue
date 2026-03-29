@@ -27,6 +27,17 @@
       <h3 class="section-title section-title--primary">Progress Rating</h3>
       <StarRating v-model="currentRating" />
     </div>
+
+    <div class="notes-section">
+      <h3 class="section-title section-title--primary">Notes</h3>
+      <Textarea
+        v-model="currentNotes"
+        autoResize
+        rows="3"
+        placeholder="Add notes about this skill"
+        class="notes-textarea"
+      />
+    </div>
   </div>
 </template>
 
@@ -34,6 +45,7 @@
 import { computed } from 'vue'
 import { useSkillsStore } from '../stores/skills'
 import Tag from 'primevue/tag'
+import Textarea from 'primevue/textarea'
 import StarRating from './StarRating.vue'
 
 const skillsStore = useSkillsStore()
@@ -44,6 +56,15 @@ const currentRating = computed({
   set: (value) => {
     if (selectedPath.value) {
       skillsStore.setProgress(selectedPath.value, value)
+    }
+  }
+})
+
+const currentNotes = computed({
+  get: () => skillsStore.selectedNotes,
+  set: (value) => {
+    if (selectedPath.value) {
+      skillsStore.setNotes(selectedPath.value, value)
     }
   }
 })
@@ -69,6 +90,15 @@ const currentRating = computed({
 .rating-section {
   border-top: 1px solid var(--surface-border);
   padding-top: 1rem;
+}
+
+.notes-section {
+  border-top: 1px solid var(--surface-border);
+  padding-top: 1rem;
+}
+
+.notes-textarea {
+  width: 100%;
 }
 
 .progress-info {

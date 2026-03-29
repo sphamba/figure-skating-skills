@@ -99,6 +99,7 @@ function createSkillKey(path) {
 export const useSkillsStore = defineStore('skills', {
   state: () => ({
     progress: {},
+    notes: {},
     selectedPath: null
   }),
 
@@ -149,6 +150,12 @@ export const useSkillsStore = defineStore('skills', {
       return state.progress[key] || 0
     },
 
+    selectedNotes: (state) => {
+      if (!state.selectedPath) return ''
+      const key = createSkillKey(state.selectedPath)
+      return state.notes[key] || ''
+    },
+
     allPaths: () => {
       return getAllSkillPaths()
     },
@@ -186,12 +193,22 @@ export const useSkillsStore = defineStore('skills', {
       this.progress[key] = rating
     },
 
+    setNotes(path, note) {
+      const key = createSkillKey(path)
+      if (note && note.trim()) {
+        this.notes[key] = note.trim()
+      } else {
+        delete this.notes[key]
+      }
+    },
+
     setSelectedPath(path) {
       this.selectedPath = path
     },
 
     clearProgress() {
       this.progress = {}
+      this.notes = {}
     },
 
     resetSelectedPath() {
