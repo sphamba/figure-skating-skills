@@ -12,6 +12,14 @@
           </Card>
         </div>
 
+        <div class="overview-panel">
+          <Card>
+            <template #content>
+              <SkillOverview />
+            </template>
+          </Card>
+        </div>
+
         <div class="right-panel">
           <Card>
             <template #content>
@@ -42,6 +50,7 @@ import { useTheme } from './composables/useTheme'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import SkillSelector from './components/SkillSelector.vue'
+import SkillOverview from './components/SkillOverview.vue'
 import ProgressDisplay from './components/ProgressDisplay.vue'
 import ProgressOverview from './components/ProgressOverview.vue'
 import ResetButton from './components/ResetButton.vue'
@@ -69,19 +78,26 @@ const { isDarkMode } = useTheme()
 
 .content-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
+  .content-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
   .content-wrapper {
     grid-template-columns: 1fr;
   }
 }
 
 .left-panel,
-.right-panel {
+.right-panel,
+.overview-panel {
   min-width: 0;
 }
 
