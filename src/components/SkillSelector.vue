@@ -132,6 +132,20 @@ const displayTypes = computed(() => {
 
 const selectedTypeObj = computed(() => selectedType.value)
 
+function resolveType(value) {
+  if (!value) return null
+  // Prefer the raw type object so displayName and variants resolve correctly.
+  if (typeof value === 'object') return value
+  // Legacy persisted state may store only the internal name (e.g. "three").
+  // Match it back to the full type (or displayedName) in the skill config.
+  const matched = displayTypes.value.find(
+    t =>
+      skillsStore.getTypeName(t.value) === value ||
+      skillsStore.getTypeDisplayName(t.value) === value
+  )
+  return matched ? matched.value : value
+}
+
 const selectedSkill = ref(null)
 const selectedType = ref(null)
 const selectedVariant0 = ref(null)
@@ -172,6 +186,25 @@ watch(selectedType, () => {
   selectedOption2.value = null
   selectedOption3.value = null
 })
+
+// Keep local selection in sync when the store path changes externally
+// (e.g. clicking a row in the overview).
+watch(
+  () => skillsStore.selectedPath,
+  (newPath) => {
+    if (!newPath) return
+    selectedSkill.value = newPath.skill
+    selectedType.value = resolveType(newPath.type)
+    selectedVariant0.value = newPath.variants?.[0] ?? null
+    selectedVariant1.value = newPath.variants?.[1] ?? null
+    selectedVariant2.value = newPath.variants?.[2] ?? null
+    selectedVariant3.value = newPath.variants?.[3] ?? null
+    selectedOption0.value = newPath.options?.[0] ?? null
+    selectedOption1.value = newPath.options?.[1] ?? null
+    selectedOption2.value = newPath.options?.[2] ?? null
+    selectedOption3.value = newPath.options?.[3] ?? null
+  }
+)
 
 // Variant/type auto-selection is handled in onSelectionChange with nextTick
 
@@ -227,7 +260,7 @@ onMounted(() => {
     selectedVariant1.value = skillsStore.selectedPath.variants?.[1] || null
     selectedVariant2.value = skillsStore.selectedPath.variants?.[2] || null
     selectedVariant3.value = skillsStore.selectedPath.variants?.[3] || null
-    selectedType.value = skillsStore.selectedPath.type
+    selectedType.value = resolveType(skillsStore.selectedPath.type)
     selectedOption0.value = skillsStore.selectedPath.options?.[0] || null
     selectedOption1.value = skillsStore.selectedPath.options?.[1] || null
     selectedOption2.value = skillsStore.selectedPath.options?.[2] || null

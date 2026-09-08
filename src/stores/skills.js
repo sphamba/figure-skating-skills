@@ -50,7 +50,7 @@ function generateSkillPaths(skillName, skillConfig, path = []) {
           paths.push({
             skill: skillName,
             variants: variantPath,
-            type: type.name,
+            type: type,
             options: typeVariantPath
           })
         })
@@ -60,7 +60,7 @@ function generateSkillPaths(skillName, skillConfig, path = []) {
         paths.push({
           skill: skillName,
           variants: variantPath,
-          type: type.name,
+          type: type,
           options: null
         })
       })
@@ -85,6 +85,23 @@ function getTypeName(type) {
     return type
   }
   return type?.name || String(type)
+}
+
+// Ensure a path's type is the canonical type object so getTypeDisplayName
+// can resolve displayName and the selector can match by reference. If a
+// bare internal-name string reaches the store (e.g. legacy persisted state
+// or a stale allPaths), map it back to the matching type object.
+function resolvePathType(path) {
+  if (!path || typeof path.type !== 'string') return path
+  const skillConfig = skillsData[path.skill]
+  const match = (skillConfig?.types || []).find(t =>
+    typeof t === 'object' &&
+    (t.name === path.type || t.displayedName === path.type)
+  )
+  if (match) {
+    return { ...path, type: match }
+  }
+  return path
 }
 
 function createSkillKey(path) {
@@ -203,7 +220,7 @@ export const useSkillsStore = defineStore('skills', {
     },
 
     setSelectedPath(path) {
-      this.selectedPath = path
+      this.selectedPath = resolvePathType(path)
     },
 
     clearProgress() {

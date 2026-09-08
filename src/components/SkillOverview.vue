@@ -16,6 +16,10 @@
         :key="index"
         class="overview-row"
         :class="{ 'overview-row--selected': leaf.isSelected }"
+        role="button"
+        tabindex="0"
+        @click="selectLeaf(leaf)"
+        @keydown.enter="selectLeaf(leaf)"
       >
         <div class="row-tags">
           <Tag
@@ -71,7 +75,8 @@ const leafSkills = computed(() => {
     return {
       parts: parts.length ? parts.map(capitalize) : [getTypeDisplayName(p.type)],
       rating: skillsStore.getRating(p),
-      isSelected: skillKey(p) === selectedKey
+      isSelected: skillKey(p) === selectedKey,
+      path: p
     }
   })
 })
@@ -89,6 +94,12 @@ function getTypeDisplayName(type) {
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+function selectLeaf(leaf) {
+  if (leaf.path) {
+    skillsStore.setSelectedPath(leaf.path)
+  }
 }
 </script>
 
@@ -117,11 +128,23 @@ function capitalize(str) {
   gap: 0.75rem;
   padding: 0.125rem 0.25rem;
   border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.overview-row:hover,
+.overview-row:focus-visible {
+  background: var(--surface-hover);
+  outline: none;
 }
 
 .overview-row--selected {
   background: color-mix(in srgb, var(--primary-color) 10%, transparent);
   box-shadow: inset 2px 0 0 0 var(--primary-color);
+}
+
+.overview-row--selected:hover {
+  background: color-mix(in srgb, var(--primary-color) 15%, transparent);
 }
 
 .row-tags {
