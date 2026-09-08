@@ -21,8 +21,8 @@
                 :key="category.key"
                 class="category-row card flex-center gap-0.75 padding-0.75"
               >
-                <span class="category-label">{{ category.label }}</span>
                 <StarDisplay :average="category.average" />
+                <span class="category-label">{{ category.label }}</span>
               </div>
             </div>
           </div>
@@ -36,8 +36,8 @@
                 :key="variant.key"
                 class="variant-row card flex-center gap-0.75 padding-0.75"
               >
-                <span class="variant-label">{{ variant.label }}</span>
                 <StarDisplay :average="variant.average" />
+                <span class="variant-label">{{ variant.label }}</span>
               </div>
             </div>
           </div>
@@ -185,6 +185,6 @@ const variantGroups = computed(() => {
   flex: 1;
   font-weight: 500;
   color: var(--text-color);
-  text-align: right;
+  text-align: left;
 }
 </style>

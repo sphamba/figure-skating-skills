@@ -21,6 +21,9 @@
         @click="selectLeaf(leaf)"
         @keydown.enter="selectLeaf(leaf)"
       >
+        <div class="row-rating">
+          <StarDisplay :average="leaf.rating" />
+        </div>
         <div class="row-tags">
           <Tag
             v-for="(part, i) in leaf.parts"
@@ -29,9 +32,6 @@
             severity="secondary"
             size="small"
           />
-        </div>
-        <div class="row-rating">
-          <StarDisplay :average="leaf.rating" />
         </div>
       </div>
     </div>
@@ -123,7 +123,7 @@ function selectLeaf(leaf) {
 
 .overview-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 0.75rem;
   padding: 0.125rem 0.25rem;
@@ -152,6 +152,7 @@ function selectLeaf(leaf) {
   flex-wrap: wrap;
   gap: 0.1875rem;
   min-width: 0;
+  justify-content: flex-start;
 }
 
 :deep(.overview-row) {
