@@ -32,6 +32,9 @@ const { isDarkMode, toggleDarkMode } = useTheme()
   padding-bottom: 1.5rem;
   border: none;
   align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .header-toolbar :deep(.p-toolbar-start) {

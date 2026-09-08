@@ -1,6 +1,8 @@
 # Figure Skating Skills Tracker
 
-A Progressive Web App (PWA) for tracking figure skating skill progression, built with Vue 3, PrimeVue, and Pinia.
+A progressive web app for tracking figure skating skill progression.
+
+Live demo: [https://sphamba.github.io/figure-skating-skills/](https://sphamba.github.io/figure-skating-skills/)
 
 ## Features
 
